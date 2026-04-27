@@ -1,0 +1,4 @@
+/** Noise texture overlay for visual depth */
+export default function NoiseOverlay() {
+  return <div className="noise" />;
+}
