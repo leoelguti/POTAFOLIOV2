@@ -2,6 +2,7 @@ import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import { getSupabase } from '../services/supabaseClient.js';
 import { sanitizeContactPayload, escapeHtml } from '../utils/sanitize.js';
+import { sendContactNotification } from '../services/emailService.js';
 
 const router = Router();
 
@@ -42,6 +43,10 @@ router.post('/', contactLimiter, async (req, res) => {
 
     // Log only non-sensitive identifier — never the full message
     console.log(`📬 New message from ${escapeHtml(name)}`);
+
+    // Fire-and-forget email notification — never blocks the response
+    sendContactNotification({ name, email, message }).catch(() => {});
+
     res.json({ success: true, message: 'Message sent successfully!' });
   } catch (err) {
     // Return user-facing validation errors
