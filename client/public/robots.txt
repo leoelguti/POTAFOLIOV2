@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leonardogutierrez.dev/sitemap.xml
+Sitemap: https://studio251.online/sitemap.xml
