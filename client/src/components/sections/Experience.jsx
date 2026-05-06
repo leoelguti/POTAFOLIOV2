@@ -9,8 +9,8 @@ export default function Experience() {
 
   return (
     <div className="sec" id="experience" ref={sectionRef}>
-      <div className="eyebrow">Experience</div>
-      <div className="sh rev">Where I've Worked</div>
+      <div className="eyebrow">Experiencia</div>
+      <div className="sh rev">Dónde he trabajado</div>
       <div className="timeline">
         {EXPERIENCE.map((exp, i) => (
           <div

@@ -35,22 +35,28 @@ export default function Projects() {
   return (
     <>
       <div className="sec" id="projects" ref={sectionRef}>
-        <div className="eyebrow">Selected Work</div>
-        <div className="sh rev">Live Applications</div>
+        <div className="eyebrow">Trabajo destacado</div>
+        <div className="sh rev">Aplicaciones en vivo</div>
         <p className="sp rev">
-          Preview any app running in production — right here, no new tab required.
+          Previsualiza cualquier app en producción — aquí mismo, sin abrir otra pestaña.
         </p>
 
-        <div className="filter-tabs rev">
-          {FILTER_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              className={`ftab ${activeFilter === cat ? 'active' : ''}`}
-              onClick={() => setActiveFilter(cat)}
-            >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </button>
-          ))}
+        <div className="filter-tabs rev" role="tablist" aria-label="Filtrar proyectos">
+          {FILTER_CATEGORIES.map((cat) => {
+            const labels = { All: 'Todos', fullstack: 'Full-stack', backend: 'Backend', frontend: 'Frontend' };
+            return (
+              <button
+                key={cat}
+                className={`ftab ${activeFilter === cat ? 'active' : ''}`}
+                onClick={() => setActiveFilter(cat)}
+                role="tab"
+                aria-selected={activeFilter === cat}
+                type="button"
+              >
+                {labels[cat] || cat}
+              </button>
+            );
+          })}
         </div>
 
         <div className="proj-grid">
@@ -71,7 +77,7 @@ export default function Projects() {
                 <div className="pcard-body">
                   <div className="pcard-head">
                     <div className="pcard-title">{project.title}</div>
-                    {project.isLive && <div className="live-badge">Live</div>}
+                    {project.isLive && <div className="live-badge">En vivo</div>}
                   </div>
                   <div className="pcard-desc">{project.description}</div>
                   <div className="pcard-tags">
@@ -80,17 +86,28 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="pcard-btns">
-                    <button className="btn-pv" onClick={() => openPreview(project.url)}>
-                      ⚡ Live Preview
+                    <button className="btn-pv" onClick={() => openPreview(project.url)} aria-label={`Vista previa de ${project.title}`}>
+                      ⚡ Vista previa
                     </button>
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-ext"
+                      aria-label={`Abrir ${project.title} en nueva pestaña`}
                     >
                       ↗
                     </a>
+                    {project.altUrl && (
+                      <button
+                        className="btn-pv"
+                        onClick={() => openPreview(project.altUrl)}
+                        aria-label={`${project.altLabel || 'Vista alternativa'} de ${project.title}`}
+                        style={{ flexBasis: '100%' }}
+                      >
+                        🎯 {project.altLabel || 'Vista alternativa'}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

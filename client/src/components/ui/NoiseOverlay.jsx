@@ -1,4 +1,4 @@
 /** Noise texture overlay for visual depth */
 export default function NoiseOverlay() {
-  return <div className="noise" />;
+  return <div className="noise" aria-hidden="true" />;
 }

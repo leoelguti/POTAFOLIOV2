@@ -38,16 +38,17 @@ export default function About() {
     <div className="sec" id="about" ref={sectionRef}>
       <div className="about-g">
         <div>
-          <div className="eyebrow">About Me</div>
-          <div className="sh rev">Engineer by craft,<br />builder by obsession.</div>
+          <div className="eyebrow">Sobre mí</div>
+          <div className="sh rev">Ingeniero por oficio,<br />constructor por obsesión.</div>
           <p className="ap rev">
-            I'm a <strong>full-stack software engineer</strong> with 4+ years turning complex ideas into
-            elegant, production-ready products. My stack of choice — <strong>Node.js, React & modern CSS</strong> — lets me move fast without cutting corners.
+            Soy <strong>ingeniero de software full-stack</strong> que convierte ideas complejas en productos
+            elegantes y listos para producción. Mi stack — <strong>Node.js, React y CSS moderno</strong> — me permite
+            moverme rápido sin sacrificar calidad.
           </p>
           <p className="ap rev">
-            I care deeply about <strong>developer experience, clean architecture</strong>, and shipping
-            software that's a joy to use. Whether it's a real-time dashboard, a headless API, or a
-            pixel-perfect UI, I treat every layer with equal respect.
+            Me preocupo profundamente por la <strong>experiencia de desarrollo, la arquitectura limpia</strong> y
+            entregar software que sea un placer usar. Sea un dashboard en tiempo real, una API headless o
+            una UI pixel-perfect, trato cada capa con el mismo respeto.
           </p>
         </div>
         <div className="tilt-wrap rev">
@@ -67,7 +68,7 @@ export default function About() {
               <div className="cl"><span className="ln">6</span><span className="prop">  open</span><span className="pn">:</span> <span className="kw">true</span><span className="pn">,</span></div>
               <div className="cl"><span className="ln">7</span><span className="prop">  coffee</span><span className="pn">:</span> <span className="str">"always"</span></div>
               <div className="cl"><span className="ln">8</span><span className="pn">{'}'};</span></div>
-              <div className="cl"><span className="ln">9</span><span className="cm">{'// currently: building cool things ✨'}</span></div>
+              <div className="cl"><span className="ln">9</span><span className="cm">{'// actualmente: construyendo cosas geniales ✨'}</span></div>
             </div>
           </div>
         </div>

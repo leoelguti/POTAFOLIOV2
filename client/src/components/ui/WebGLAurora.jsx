@@ -8,6 +8,8 @@ export default function WebGLAurora() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
     const c = canvasRef.current;
     if (!c) return;
 
@@ -107,5 +109,5 @@ export default function WebGLAurora() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} id="glc" />;
+  return <canvas ref={canvasRef} id="glc" aria-hidden="true" />;
 }
