@@ -41,14 +41,13 @@ export default function Contact() {
 
     if (!trimmed.name || !trimmed.email || !trimmed.message) {
       setStatus('error');
-      setErrorMsg('All fields are required.');
+      setErrorMsg('Todos los campos son obligatorios.');
       return;
     }
 
-    // Basic email format check
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed.email)) {
       setStatus('error');
-      setErrorMsg('Please enter a valid email address.');
+      setErrorMsg('Ingresa un correo válido.');
       return;
     }
 
@@ -58,72 +57,78 @@ export default function Contact() {
       setForm({ name: '', email: '', message: '' });
     } catch (err) {
       setStatus('error');
-      // Only show safe, non-technical error messages
       const safeMsg = typeof err.message === 'string' && err.message.length < 200
         ? err.message
-        : 'Failed to send message. Please try again.';
+        : 'No se pudo enviar el mensaje. Inténtalo de nuevo.';
       setErrorMsg(safeMsg);
     }
   };
 
   return (
     <div className="sec" id="contact" ref={sectionRef}>
-      <div className="eyebrow">Contact</div>
+      <div className="eyebrow">Contacto</div>
       <div className="contact-layout">
         <div className="cinfo">
           <div className="sh rev">
-            Let's build<br />something great.
+            Construyamos algo<br />grande juntos.
           </div>
           <p className="rev">
-            Open to freelance projects, full-time roles, and interesting conversations.
-            If you have an idea, I'd love to hear it.
+            Disponible para proyectos freelance, roles full-time y conversaciones interesantes.
+            Si tienes una idea, me encantaría escucharla.
           </p>
           <div className="c-links">
             <a href={`mailto:${SITE_CONFIG.email}`} className="clink rev">
-              <div className="clink-ic">✉</div>
+              <div className="clink-ic" aria-hidden="true">✉</div>
               {SITE_CONFIG.email}
             </a>
-            <a href={SITE_CONFIG.github} className="clink rev" style={{ transitionDelay: '.07s' }} target="_blank" rel="noopener noreferrer">
-              <div className="clink-ic">⬡</div>
-              {SITE_CONFIG.github.replace('https://', '')}
-            </a>
-            <a href={SITE_CONFIG.linkedin} className="clink rev" style={{ transitionDelay: '.14s' }} target="_blank" rel="noopener noreferrer">
-              <div className="clink-ic">in</div>
-              {SITE_CONFIG.linkedin.replace('https://', '')}
-            </a>
-            <a href={SITE_CONFIG.twitter} className="clink rev" style={{ transitionDelay: '.21s' }} target="_blank" rel="noopener noreferrer">
-              <div className="clink-ic">𝕏</div>
-              @{SITE_CONFIG.twitter.split('/').pop()}
-            </a>
+            {SITE_CONFIG.github && (
+              <a href={SITE_CONFIG.github} className="clink rev" style={{ transitionDelay: '.07s' }} target="_blank" rel="noopener noreferrer">
+                <div className="clink-ic" aria-hidden="true">⬡</div>
+                {SITE_CONFIG.github.replace('https://', '')}
+              </a>
+            )}
+            {SITE_CONFIG.linkedin && (
+              <a href={SITE_CONFIG.linkedin} className="clink rev" style={{ transitionDelay: '.14s' }} target="_blank" rel="noopener noreferrer">
+                <div className="clink-ic" aria-hidden="true">in</div>
+                {SITE_CONFIG.linkedin.replace('https://', '')}
+              </a>
+            )}
+            {SITE_CONFIG.twitter && (
+              <a href={SITE_CONFIG.twitter} className="clink rev" style={{ transitionDelay: '.21s' }} target="_blank" rel="noopener noreferrer">
+                <div className="clink-ic" aria-hidden="true">𝕏</div>
+                @{SITE_CONFIG.twitter.split('/').pop()}
+              </a>
+            )}
           </div>
         </div>
 
         <div className="cform rev">
           {status === 'success' ? (
-            <div className="form-success">
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✨</div>
-              <div>Message sent successfully!</div>
+            <div className="form-success" role="status" aria-live="polite">
+              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }} aria-hidden="true">✨</div>
+              <div>¡Mensaje enviado correctamente!</div>
               <p style={{ color: 'var(--muted2)', fontSize: '.85rem', marginTop: '.5rem' }}>
-                I'll get back to you soon.
+                Te responderé pronto.
               </p>
               <button
                 className="fsubmit"
                 style={{ marginTop: '1.5rem', maxWidth: '200px', margin: '1.5rem auto 0' }}
                 onClick={() => setStatus('idle')}
+                type="button"
               >
-                Send another
+                Enviar otro
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} noValidate>
+            <form onSubmit={handleSubmit} noValidate aria-label="Formulario de contacto">
               <div>
-                <label className="flabel" htmlFor="contact-name">Name</label>
+                <label className="flabel" htmlFor="contact-name">Nombre</label>
                 <input
                   id="contact-name"
                   className="finput"
                   type="text"
                   name="name"
-                  placeholder="John Doe"
+                  placeholder="Nombre Apellido"
                   value={form.name}
                   onChange={handleChange}
                   maxLength={100}
@@ -132,13 +137,13 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="flabel" htmlFor="contact-email">Email</label>
+                <label className="flabel" htmlFor="contact-email">Correo</label>
                 <input
                   id="contact-email"
                   className="finput"
                   type="email"
                   name="email"
-                  placeholder="john@example.com"
+                  placeholder="tu@correo.com"
                   value={form.email}
                   onChange={handleChange}
                   maxLength={100}
@@ -147,28 +152,28 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="flabel" htmlFor="contact-message">Message</label>
+                <label className="flabel" htmlFor="contact-message">Mensaje</label>
                 <textarea
                   id="contact-message"
                   className="ftextarea"
                   name="message"
-                  placeholder="Tell me about your project…"
+                  placeholder="Cuéntame sobre tu proyecto…"
                   value={form.message}
                   onChange={handleChange}
                   maxLength={2000}
                   required
                 />
-                <div style={{ textAlign: 'right', fontSize: '.72rem', color: 'var(--muted2)', marginTop: '.25rem' }}>
+                <div style={{ textAlign: 'right', fontSize: '.72rem', color: 'var(--muted2)', marginTop: '.25rem' }} aria-live="polite">
                   {form.message.length}/2000
                 </div>
               </div>
               {status === 'error' && (
-                <p style={{ color: 'var(--a3)', fontSize: '.82rem', marginBottom: '1rem', fontFamily: 'var(--mono)' }}>
+                <p role="alert" style={{ color: 'var(--a3)', fontSize: '.82rem', marginBottom: '1rem', fontFamily: 'var(--mono)' }}>
                   {errorMsg}
                 </p>
               )}
               <button className="fsubmit" type="submit" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Sending…' : 'Send Message →'}
+                {status === 'sending' ? 'Enviando…' : 'Enviar mensaje →'}
               </button>
             </form>
           )}

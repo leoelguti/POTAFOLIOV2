@@ -22,21 +22,24 @@ export default function Navbar() {
   return (
     <>
       <div id="progress" style={{ width: `${progress}%` }} />
-      <nav id="nav" className={`${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
-        <div className="logo">
+      <nav id="nav" className={`${scrolled ? 'scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`} aria-label="Navegación principal">
+        <a href="#hero" className="logo" aria-label="Inicio">
           <em>{SITE_CONFIG.logoInitials}</em> · {SITE_CONFIG.logoText}
-        </div>
-        <ul className="nav-links">
-          <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
-          <li><a href="#projects" onClick={() => setMenuOpen(false)}>Work</a></li>
-          <li><a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a></li>
-          <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+        </a>
+        <ul className="nav-links" id="primary-nav">
+          <li><a href="#about" onClick={() => setMenuOpen(false)}>Sobre mí</a></li>
+          <li><a href="#projects" onClick={() => setMenuOpen(false)}>Proyectos</a></li>
+          <li><a href="#experience" onClick={() => setMenuOpen(false)}>Experiencia</a></li>
+          <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contacto</a></li>
         </ul>
-        <a href="#contact" className="nav-hire">Hire Me</a>
+        <a href="#contact" className="nav-hire">Contratar</a>
         <button
           className="hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-nav"
+          type="button"
         >
           <span /><span /><span />
         </button>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+/* Fonts loaded via <link preconnect> in index.html (avoids render-blocking @import) */
 
 /* ═══════════════════════════════════
    DESIGN SYSTEM — CSS VARIABLES
@@ -47,7 +47,31 @@ body {
   color: var(--text);
   font-family: var(--sans);
   overflow-x: hidden;
-  cursor: none;
+}
+
+/* Hide native cursor only when a precise pointer (mouse) is available.
+   Touch / pen / keyboard users keep the system cursor + focus ring. */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+}
+
+/* Always show a visible focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--a2);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Respect users that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  .rev { opacity: 1; transform: none; }
 }
 
 /* Scrollbar */

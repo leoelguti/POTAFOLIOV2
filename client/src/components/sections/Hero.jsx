@@ -57,29 +57,29 @@ export default function Hero() {
         </h1>
         <SafeDescription text={SITE_CONFIG.description} />
         <div className="hero-ctas">
-          <a href="#projects" className="cta-main">See my work →</a>
-          <a href="#contact" className="cta-ghost">Get in touch</a>
+          <a href="#projects" className="cta-main">Ver mi trabajo →</a>
+          <a href="#contact" className="cta-ghost">Contactarme</a>
         </div>
       </div>
 
-      {/* Floating HUD cards */}
-      <div className="floater floater-1">
+      {/* Floating HUD cards (decorative) */}
+      <div className="floater floater-1" aria-hidden="true">
         <span className="dot" style={{ background: 'var(--a4)' }} />
         node server.js<br />
         <em>✓ Running on :3000</em>
       </div>
-      <div className="floater floater-2">
+      <div className="floater floater-2" aria-hidden="true">
         <span className="dot" style={{ background: 'var(--a2)' }} />
         git push origin main<br />
         <em>✓ Deployed to prod</em>
       </div>
-      <div className="floater floater-3">
+      <div className="floater floater-3" aria-hidden="true">
         <span className="dot" style={{ background: 'var(--a3)' }} />
-        Lighthouse score<br />
-        <em>100 / 100 / 100 / 100</em>
+        npm run build<br />
+        <em>✓ Compilado sin errores</em>
       </div>
 
-      <div className="scroll-ind">
+      <div className="scroll-ind" aria-hidden="true">
         <div className="scroll-line" />
         <span>Scroll</span>
       </div>

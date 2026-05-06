@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 /**
  * Validates that a URL uses https:// protocol.
@@ -20,13 +20,9 @@ function isValidUrl(urlStr) {
  * Iframe is sandboxed and only loads validated URLs.
  */
 export default function ProjectModal({ isOpen, url, onClose }) {
-  const [currentUrl, setCurrentUrl] = useState('');
+  const currentUrl = url || '';
   const bodyRef = useRef(null);
   const validUrl = isValidUrl(currentUrl);
-
-  useEffect(() => {
-    setCurrentUrl(url || '');
-  }, [url]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -98,8 +94,7 @@ export default function ProjectModal({ isOpen, url, onClose }) {
                 loading="lazy"
                 onLoad={(e) => {
                   try {
-                    // eslint-disable-next-line no-unused-expressions
-                    e.target.contentWindow.location.href;
+                    void e.target.contentWindow.location.href;
                     const panel = e.target.previousElementSibling;
                     if (panel) panel.style.display = 'none';
                   } catch {

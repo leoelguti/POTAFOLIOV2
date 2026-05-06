@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { STATS } from '../../utils/constants';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
 
-/**
- * Animated stats counter band.
- */
 function animateCount(el, target, suffix = '') {
   let start = null;
   const duration = 1800;
@@ -19,17 +15,22 @@ function animateCount(el, target, suffix = '') {
 }
 
 export default function Stats() {
-  const sectionRef = useScrollReveal();
   const countRefs = useRef([]);
 
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const idx = Number(entry.target.dataset.idx);
             const stat = STATS[idx];
-            animateCount(entry.target, stat.value, stat.suffix);
+            if (reduced) {
+              entry.target.textContent = stat.value + stat.suffix;
+            } else {
+              animateCount(entry.target, stat.value, stat.suffix);
+            }
+            entry.target.classList.add('in');
             observer.unobserve(entry.target);
           }
         });
@@ -45,14 +46,15 @@ export default function Stats() {
   }, []);
 
   return (
-    <div className="stats-band" ref={sectionRef}>
+    <div className="stats-band">
       <div className="stats-grid">
         {STATS.map((stat, i) => (
-          <div className="stat-item rev" key={stat.label} style={{ transitionDelay: `${i * 0.08}s` }}>
+          <div className="stat-item rev in" key={stat.label} style={{ transitionDelay: `${i * 0.08}s` }}>
             <div
               className="stat-val"
               data-idx={i}
               ref={(el) => (countRefs.current[i] = el)}
+              aria-label={`${stat.value}${stat.suffix} ${stat.label}`}
             >
               0
             </div>

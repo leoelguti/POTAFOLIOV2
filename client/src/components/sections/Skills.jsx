@@ -9,7 +9,7 @@ export default function Skills() {
 
   return (
     <div className="skills-wrap" ref={ref}>
-      <div className="eyebrow" style={{ marginBottom: '1.5rem' }}>Tech Stack</div>
+      <div className="eyebrow" style={{ marginBottom: '1.5rem' }}>Stack tecnológico</div>
       <div className="skill-row rev">
         {SKILLS.map((skill) => (
           <span className="stag" key={skill.name}>

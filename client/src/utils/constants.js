@@ -1,20 +1,24 @@
-// Static data fallbacks — used when API is not available
+// Static data fallbacks — used when API is not available.
+// TODO: replace placeholder URLs/companies with real data before deploy.
+
 export const SITE_CONFIG = {
   name: 'Leonardo Gutierrez',
   firstName: 'Leonardo',
   lastName: 'Gutierrez.',
   role: 'Full-stack engineer',
   tagline: 'Disponible para nuevos proyectos',
-  description: 'I build <strong>fast, scalable web applications</strong> with Node.js, React & Tailwind CSS. From architecture to deployment — obsessive about every layer.',
-  email: 'LeonardoGutierrezDev@hotmail.com',
-  github: 'https://github.com/alexjohnson',
-  linkedin: 'https://linkedin.com/in/alexjohnson',
-  twitter: 'https://twitter.com/alexjohnson',
+  description: 'Construyo <strong>aplicaciones web rápidas y escalables</strong> con Node.js, React y Tailwind CSS. Desde la arquitectura hasta el deploy — obsesivo con cada capa.',
+  email: 'leonardoagutierrezg@gmail.com',
+  // TODO: confirm real handles
+  github: 'https://github.com/leoelguti',
+  linkedin: 'https://www.linkedin.com/in/leonardo-gutierrez/',
+  twitter: '', // empty = hidden in UI
   logoInitials: 'LG',
-  logoText: 'Portafolio',
+  logoText: 'leonardo.dev',
 };
 
-export const SKILLS = [
+// Single source of truth for tech stack — used by Skills + Marquee.
+export const TECH_STACK = [
   { name: 'Node.js', color: '#68a063' },
   { name: 'React', color: '#61dafb' },
   { name: 'Tailwind', color: '#38bdf8' },
@@ -33,74 +37,79 @@ export const SKILLS = [
   { name: 'Vercel', color: '#fff' },
 ];
 
+// Backwards-compat aliases (kept until callers migrate).
+export const SKILLS = TECH_STACK;
+export const MARQUEE_TECHS = TECH_STACK.map((t) => t.name);
+
 export const PROJECTS = [
   {
-    id: '1',
-    icon: '🚀',
+    id: 'kaja',
+    icon: '🛒',
     hue: 260,
-    title: 'Projecto Kaja',
-    description: 'Real-time analytics dashboard with live metrics, WebSocket streaming & alerting.',
-    tags: ['React', 'Node.js', 'WebSockets', 'PostgreSQL'],
+    title: 'Kaja POS',
+    description: 'Sistema punto de venta web — gestión de inventario, ventas y reportes en tiempo real.',
+    tags: ['React', 'Node.js', 'Vercel'],
     category: 'fullstack',
-    url: 'https://example.com',
+    url: 'https://kajapos.vercel.app/',
+    repo: '',
     isLive: true,
   },
   {
-    id: '2',
-    icon: '🛠️',
+    id: 'sgae',
+    icon: '🎓',
     hue: 190,
-    title: 'Projecto SGAE',
-    description: 'API management platform — request testing, team workspaces & version history.',
-    tags: ['Next.js', 'Express', 'Redis', 'GraphQL'],
-    category: 'backend',
-    url: 'https://example.com',
+    title: 'SGAE Togo',
+    description: 'Sistema de gestión académica — administración de estudiantes, cursos y calificaciones.',
+    tags: ['React', 'Node.js', 'Vercel'],
+    category: 'fullstack',
+    url: 'https://sgae-togo.vercel.app/home',
+    repo: '',
     isLive: true,
   },
   {
-    id: '3',
-    icon: '🤖',
+    id: 'bingo',
+    icon: '🎰',
     hue: 310,
-    title: 'Projecto Bingo Max',
-    description: 'AI-powered document processor. Upload PDFs, get back structured insights instantly.',
-    tags: ['React', 'Node.js', 'OpenAI', 'AWS S3'],
+    title: 'Bingo Game · Pro Max',
+    description: 'Bingo multijugador con dos vistas: animador (sorteo en vivo) y jugadores (cartones interactivos).',
+    tags: ['React', 'WebSockets', 'Vercel'],
     category: 'fullstack',
-    url: 'https://example.com',
+    url: 'https://bingo-gamevcsb.vercel.app/',
+    altUrl: 'https://bingo-gamevcsb.vercel.app/player.html',
+    altLabel: 'Vista jugador',
+    repo: '',
     isLive: true,
   },
 ];
 
+// TODO: replace with real companies once available.
 export const EXPERIENCE = [
   {
-    yearRange: '2024–Present',
-    title: 'Senior Full-Stack Engineer',
-    company: 'TechCorp Inc.',
-    description: 'Led a team of 5 engineers building a real-time SaaS platform serving 50k+ users. Architected the Node.js microservices backend and React frontend.',
+    yearRange: '2024–Presente',
+    title: 'Ingeniero Full-Stack',
+    company: 'Freelance / Proyectos propios',
+    description: 'Desarrollo de plataformas SaaS y APIs end-to-end. Arquitectura de servicios Node.js y frontends React optimizados.',
   },
   {
-    yearRange: '2022–2024',
-    title: 'Full-Stack Developer',
-    company: 'StartupXYZ',
-    description: 'Built and shipped 3 major product features end-to-end. Reduced API response times by 60% through Redis caching and query optimization.',
+    yearRange: '2023–2024',
+    title: 'Desarrollador Full-Stack',
+    company: 'Proyectos cliente',
+    description: 'Entrega de funcionalidades end-to-end. Reducción de tiempos de respuesta de API mediante caching y optimización de consultas.',
   },
   {
-    yearRange: '2021–2022',
-    title: 'Frontend Developer',
-    company: 'Digital Agency Co.',
-    description: 'Delivered 10+ client projects using React and Tailwind CSS. Introduced TypeScript across the team, improving code quality significantly.',
+    yearRange: '2022–2023',
+    title: 'Desarrollador Frontend',
+    company: 'Proyectos web',
+    description: 'Sitios y dashboards con React, Tailwind CSS y TypeScript. Foco en performance y experiencia de usuario.',
   },
 ];
 
+// Stats coherent with experience claim (1+ year shown to user).
 export const STATS = [
   { value: 1, label: 'Años de experiencia', suffix: '+' },
-  { value: 3, label: 'Projectos desplegados', suffix: '+' },
+  { value: 3, label: 'Proyectos desplegados', suffix: '+' },
   { value: 3, label: 'Clientes felices', suffix: '+' },
-  { value: 99, label: 'Tiempo de actividad %', suffix: '%' },
-];
-
-export const MARQUEE_TECHS = [
-  'Node.js', 'React', 'Tailwind CSS', 'TypeScript', 'PostgreSQL',
-  'Docker', 'Redis', 'GraphQL', 'REST APIs', 'AWS',
-  'Vite', 'Next.js', 'Prisma', 'Express', 'GitHub Actions', 'Vercel',
+  { value: 99, label: 'Tiempo de actividad', suffix: '%' },
 ];
 
 export const FILTER_CATEGORIES = ['All', 'fullstack', 'backend', 'frontend'];
